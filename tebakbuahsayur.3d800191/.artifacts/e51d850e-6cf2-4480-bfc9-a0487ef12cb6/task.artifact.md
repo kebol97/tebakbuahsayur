@@ -1,0 +1,6 @@
+- `[x]` Configure Gradle dependencies and Compose setup
+- `[x]` Implement Data models, Game repository, and Score persistence manager
+- `[x]` Implement Modern Kids Theme and Splash Screen (4-second timer)
+- `[x]` Implement Main Menu (2x2 grid) and Category Selection screen
+- `[x]` Implement Game Screen, Result Screen, History Screen, How to Play, and About Screen (with Disclaimer & AdMob readiness)
+- `[x]` Wire up NavHost in MainActivity and verify build & functionality
