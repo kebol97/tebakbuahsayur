@@ -1,0 +1,9 @@
+{
+  "admobAppId": "ca-app-pub-3940256099942544~3347511713",
+  "bannerAdUnitId": "ca-app-pub-3940256099942544/6300978111",
+  "interstitialAdUnitId": "ca-app-pub-3940256099942544/1033173712",
+  "appOpenAdUnitId": "ca-app-pub-3940256099942544/9257390721",
+  "nativeAdUnitId": "ca-app-pub-3940256099942544/2247696110",
+  "interstitialInterval": 3,
+  "isAdsEnabled": true
+}
