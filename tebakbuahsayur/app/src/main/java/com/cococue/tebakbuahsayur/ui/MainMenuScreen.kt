@@ -1,5 +1,7 @@
 package com.cococue.tebakbuahsayur.ui
 
+import android.app.Activity
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import com.cococue.tebakbuahsayur.ads.BannerAdView
 import androidx.compose.foundation.clickable
@@ -18,16 +20,23 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -40,6 +49,58 @@ fun MainMenuScreen(
     onNavigateToHowToPlay: () -> Unit,
     onNavigateToAbout: () -> Unit
 ) {
+    val context = LocalContext.current
+    var showExitDialog by remember { mutableStateOf(false) }
+
+    // Intercept back navigation to show exit confirmation dialog
+    BackHandler {
+        showExitDialog = true
+    }
+
+    if (showExitDialog) {
+        AlertDialog(
+            onDismissRequest = { showExitDialog = false },
+            title = {
+                Text(
+                    text = "Konfirmasi Keluar",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp
+                )
+            },
+            text = {
+                Text(
+                    text = "Apakah Anda yakin ingin keluar dari aplikasi?",
+                    fontSize = 16.sp
+                )
+            },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        showExitDialog = false
+                        (context as? Activity)?.finish()
+                    }
+                ) {
+                    Text(
+                        text = "Ya, Keluar",
+                        color = Color(0xFFE74C3C),
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+            },
+            dismissButton = {
+                TextButton(
+                    onClick = { showExitDialog = false }
+                ) {
+                    Text(
+                        text = "Batal",
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+            },
+            shape = RoundedCornerShape(16.dp)
+        )
+    }
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -63,7 +124,7 @@ fun MainMenuScreen(
         ) {
             // Header / Title banner
             Text(
-                text = "🎮 DUNIA CERIA 🎮",
+                text = "DUNIA CERIA",
                 color = Color.Yellow,
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold
@@ -130,7 +191,7 @@ fun MainMenuScreen(
 
             Spacer(modifier = Modifier.height(24.dp))
             Text(
-                text = "Versi 1.0 • Aman untuk Anak & Keluarga",
+                text = "Cococue Developer",
                 color = Color.White.copy(alpha = 0.8f),
                 fontSize = 12.sp,
                 fontWeight = FontWeight.Medium
